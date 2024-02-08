@@ -10,7 +10,6 @@ public class Player {
 		this.setPlayerHealth(playerHealth);
 		this.setPlayerMana(playerMana);
 		this.setPlayerWeapon(playerWeapon);
-		this.setPlayerAttack(playerWeapon.getAttackValue());
 	}
 
 	public int getPlayerHealth() {
