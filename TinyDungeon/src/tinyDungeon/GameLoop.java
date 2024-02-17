@@ -43,7 +43,7 @@ public class GameLoop {
 			}else if(dungeon.getIsEmpty()==false && hadCombat==false) {
 				System.out.println("A goblin appears!");
 				Goblin goblin = new Goblin();
-				while(goblin.getGoblinHealth()>0) {
+				while(goblin.getGoblinHealth()>0 && player.getPlayerHealth()>0) {
 					System.out.println("choose your move");
 					System.out.println("1:Attack 2:Defend");
 					int combat = scan.nextInt();
@@ -54,19 +54,25 @@ public class GameLoop {
 						System.out.println("The goblin attacks!");
 						player.setPlayerHealth(player.getPlayerHealth()-goblin.getGoblinAttack());
 						System.out.println("You have "+player.getPlayerHealth()+" HP remaining.");
-						}	
-				}
+					} else if(combat == 2) {
+						System.out.println("you protect yourself");
+						System.out.println("The goblin attacks!");
+						player.setPlayerHealth(player.getPlayerHealth() - goblin.getGoblinAttack()/2);
+						System.out.println("You have "+player.getPlayerHealth()+" HP remaining.");
+						}
+				}if(player.getPlayerHealth() <= 0) {
+					System.out.println("You died.");
+				}else {
 				System.out.println("You won the fight!");
 				hadCombat = true;
+				}
 			}
 		dungeon.setIsEmpty(diceroll.nextBoolean());
 		}
 	if(dungeon.getNumberOfRooms() == 0) {
 		System.out.println("congratulations, you have vanquished the dungeon!");
 	}
-	if(player.getPlayerHealth() == 0) {
-		System.out.println("You died.");
-	}
+	
 	}
 
 void foundASword(Player player, Scanner scan) {
