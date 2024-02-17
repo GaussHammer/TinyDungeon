@@ -16,6 +16,7 @@ public class GameLoop {
 	while(dungeon.getNumberOfRooms()>0 && player.getPlayerHealth()>0) {
 		
 		if(dungeon.getIsEmpty()==true) {
+			//reset of the hadCombat variable at the entrance of a new room
 			hadCombat = false;
 			System.out.println("the room is empty");
 			System.out.println("what will you choose?");
@@ -30,14 +31,19 @@ public class GameLoop {
 					System.out.println("only "+ dungeon.getNumberOfRooms()+" rooms remaining");
 
 				} else if(choice == 2) {
-			
+					
 					if (hasSearched==false) {
+						
+						/*only a sword can be found, can be expanded by including a dice roll giving chances
+						 * of obtaining a sword, another item or nothing. So far the player will always
+						 * find a sword by default in this case.
+						 */
 						foundASword(player,scan);
-						hasSearched = true;
+						//using the hasSearched boolean to prevent player spamming the "search room" choice
+						hasSearched = true; 
 						hadCombat = true;
 					}else if(hasSearched==true) {
 						System.out.println("you have already searched this room");
-						hadCombat = true;
 					}
 				}
 			}else if(dungeon.getIsEmpty()==false && hadCombat==false) {
